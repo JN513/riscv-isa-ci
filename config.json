@@ -1,0 +1,13 @@
+{
+    "cores":[
+        {
+            "repository":"",
+            "name":"RISC-V STEEL",
+            "folder":"",
+            "files": [
+
+            ],
+            "topModule": ""
+        }
+    ]
+}
