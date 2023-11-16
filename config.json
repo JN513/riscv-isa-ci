@@ -1,13 +1,38 @@
 {
     "cores":[
         {
-            "repository":"",
+            "repository":"https://github.com/riscv-steel/riscv-steel.git",
             "name":"RISC-V STEEL",
-            "folder":"",
+            "folder":"stell",
+            "files": [
+                "./processors/stell/hardware/ram.v",
+                "./processors/stell/hardware/rvsteel-core.v",
+                "./processors/stell/hardware/uart.v",
+                "./processors/stell/hardware/bus-mux.v",
+                "./processors/stell/hardware/rvsteel-soc.v"
+            ],
+            "cstfile": "./processors/stell/hello-world/tang-nano-20k/tang-nano-20k-constraints.cst",
+            "enable": true
+        },
+        {
+            "repository":"https://github.com/liangkangnan/tinyriscv.git",
+            "name":"Tinyriscv",
+            "folder":"tinyriscv",
             "files": [
 
             ],
-            "topModule": ""
+            "cstfile": "",
+            "enable": false
+        },
+        {
+            "repository":"https://github.com/veeYceeY/AUK-V-Aethia.git",
+            "name":"Auk-V",
+            "folder":"auk-v",
+            "files": [
+
+            ],
+            "cstfile": "",
+            "enable": false
         }
     ]
 }
