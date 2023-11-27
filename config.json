@@ -22,7 +22,7 @@
 
             ],
             "cstfile": "",
-            "enable": false
+            "enable": true
         },
         {
             "repository":"https://github.com/veeYceeY/AUK-V-Aethia.git",
