@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-import time
+from time import time
 
 
 CONFIG_FILE = "config.json"

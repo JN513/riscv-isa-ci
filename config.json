@@ -5,13 +5,18 @@
             "name":"RISC-V STEEL",
             "folder":"stell",
             "files": [
-                "./processors/stell/hardware/ram.v",
+                "./processors/stell/hardware/ram-memory.v",
                 "./processors/stell/hardware/rvsteel-core.v",
                 "./processors/stell/hardware/uart.v",
-                "./processors/stell/hardware/bus-mux.v",
-                "./processors/stell/hardware/rvsteel-soc.v"
+                "./processors/stell/hardware/system-bus.v",
+                "./processors/stell/hardware/rvsteel-soc.v",
+                "./processors/stell/hello-world/tang-nano-20k/hello-word-tang-nano-20k.v"
             ],
-            "cstfile": "./processors/stell/hello-world/tang-nano-20k/tang-nano-20k-constraints.cst",
+            "constraints": [
+                "serial",
+                "clk",
+                "reset"
+            ],
             "enable": true
         },
         {
@@ -21,8 +26,12 @@
             "files": [
 
             ],
-            "cstfile": "",
-            "enable": true
+            "constraints": [
+                "serial",
+                "clk",
+                "reset"
+            ],
+            "enable": false
         },
         {
             "repository":"https://github.com/veeYceeY/AUK-V-Aethia.git",
@@ -31,7 +40,11 @@
             "files": [
 
             ],
-            "cstfile": "",
+            "constraints": [
+                "serial",
+                "clk",
+                "reset"
+            ],
             "enable": false
         }
     ]

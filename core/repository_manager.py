@@ -34,8 +34,8 @@ def check_and_clone_repositories(data: dict[str, any]) -> None:
         name: str = core["name"]
         repository: str = core["repository"]
         folder: str = core["folder"]
-        files: list[str] = core["files"]
-        cstfile: str = core["cstfile"]
+        # files: list[str] = core["files"]
+        # constraints: str = core["constraints"]
 
         print(f"Log: updating repository {i + 1} processor: {name}")
 
