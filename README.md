@@ -3,8 +3,8 @@
 CI/CD para núcleos RISC-V
 
 Don't speak Portuguese, [click here](README_en.md)
+
 No hables portugués, [haz clic aquí](README_es.md)
-[不会说葡萄牙语，请点击这里](README_cn.md)
 
 Software desenvolvido para testar processadores baseados na arquitetura RISC-V. O software abrange testes desde a síntese do processador em linguagem HDL (Verilog ou VHDL) até a execução de instruções com o processador operando em FPGA.
 
