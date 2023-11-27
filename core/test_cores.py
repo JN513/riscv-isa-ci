@@ -79,4 +79,4 @@ def build_and_check_cores(data: dict[str, any], board: str = "tangnano20k") -> N
 
         check_core(board)
 
-        os.rmdir("build")
+        # os.rmdir("build")
