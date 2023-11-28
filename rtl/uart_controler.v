@@ -32,7 +32,7 @@ initial begin
     output_sel = 1'b0;
     led = 1'b1;
     input_sel = 1'b0;
-    clk_enable = 1'b';
+    clk_enable = 1'b1;
 end
 
 assign serial_tx = (output_sel == 1'b1) ? tx_module : tx_soc;
