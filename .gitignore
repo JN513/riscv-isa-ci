@@ -162,3 +162,5 @@ processors/
 *.fs
 out/
 logs/
+*.bit
+teste.py
