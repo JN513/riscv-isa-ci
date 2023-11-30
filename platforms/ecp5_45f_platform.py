@@ -7,7 +7,7 @@
 
 from litex.build.generic_platform import *
 from litex.build.lattice import LatticeECP5Platform
-from litex.build.lattice.programmer import OpenOCDJTAGProgrammer
+from litex.build.openfpgaloader import OpenFPGALoader
 
 import os
 
@@ -22,9 +22,17 @@ _io = [
     (
         "serial",
         0,
-        Subsignal("rx", Pins("E1"), IOStandard("LVCMOS25")),  # LVCMOS25
-        Subsignal("tx", Pins("E4"), IOStandard("LVCMOS25")),  # LVCMOS25
+        Subsignal("rx", Pins("J17"), IOStandard("LVCMOS33")),
+        Subsignal("tx", Pins("H18"), IOStandard("LVCMOS33")),
     ),
+    ("led_n", 0,  Pins("J16"), IOStandard("LVCMOS33")),
+    ("led_n", 1,  Pins("J18"), IOStandard("LVCMOS33")),
+    ("led_n", 2,  Pins("L5"), IOStandard("LVCMOS33")),
+    ("led_n", 3,  Pins("P16"), IOStandard("LVCMOS33")),
+    ("led_n", 4,  Pins("M4"), IOStandard("LVCMOS33")),
+    ("led_n", 5,  Pins("L4"), IOStandard("LVCMOS33")),
+    ("led_n", 6,  Pins("R3"), IOStandard("LVCMOS33")),
+    ("led_n", 7,  Pins("N4"), IOStandard("LVCMOS33")),
 ]
 
 # Platform -----------------------------------------------------------------------------------------
@@ -43,7 +51,7 @@ class Platform(LatticeECP5Platform):
         return LatticeECP5Platform.request(self, *args, **kwargs)
 
     def create_programmer(self):
-        return OpenOCDJTAGProgrammer("openocd_evn_ecp5.cfg")
+        return OpenFPGALoader(cable="cmsisdap")
 
     def do_finalize(self, fragment):
         LatticeECP5Platform.do_finalize(self, fragment)
