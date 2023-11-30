@@ -8,19 +8,8 @@ from litex_boards.platforms import (
     lattice_ecp5_vip,
 )
 from platforms import ecp5_45f_platform
+from platforms.ios import ios_tang_nano_20k, ios_tang_nano_9k
 from migen import Module
-from ios import *
-
-
-def get_clk_name(board: str) -> str:
-    if board == "tangnano20k":
-        return "clk27"
-    if board == "tangnano9k":
-        return "clk27"
-    if board == "ecp5_45f":
-        return "clk25"
-
-    return "clk"
 
 
 def check_core(
@@ -33,7 +22,9 @@ def check_core(
     return 0
 
 
-def build_core(name: str, board: str, files: list[str], constraints: list[str]) -> None:
+def build_and_flash_core(
+    name: str, board: str, files: list[str], constraints: list[str]
+) -> None:
     platform = None
 
     if board == "tangnano9k":
@@ -46,11 +37,11 @@ def build_core(name: str, board: str, files: list[str], constraints: list[str]) 
         platform.add_extension(ios_tang_nano_20k)
 
     for constraint in constraints:
-        if constraint == "clk":
-            # platform.request(get_clk_name(board))
-            continue
+        ops = constraint.split(":")
+        if len(ops) == 1:
+            platform.request(ops[0])
         else:
-            platform.request(constraint)
+            platform.request(ops[0], int(ops[1]))
 
     for file in files:
         platform.add_source(file)
@@ -58,6 +49,15 @@ def build_core(name: str, board: str, files: list[str], constraints: list[str]) 
     module = Module()
 
     platform.build(module)
+
+    programer = platform.create_programmer()
+
+    if board == "tangnano9k":
+        programer.flash(0, "build/top.fs", external=True)
+    elif board == "ecp5_45f":
+        programer.flash(0, "build/top.fs", external=True)
+    else:
+        programer.flash(0, "build/top.fs", external=True)
 
 
 def build_and_check_cores(data: dict[str, any], board: str = "tangnano20k") -> None:
@@ -75,8 +75,6 @@ def build_and_check_cores(data: dict[str, any], board: str = "tangnano20k") -> N
 
         print(f"Log: Testing repository {i + 1} processor: {name}")
 
-        build_core(name, board, files, constraints)
+        build_and_flash_core(name, board, files, constraints)
 
         check_core(board)
-
-        # os.rmdir("build")
