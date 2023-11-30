@@ -30,11 +30,14 @@ def build_and_flash_core(
     if board == "tangnano9k":
         platform = sipeed_tang_nano_9k.Platform()
         platform.add_extension(ios_tang_nano_9k)
+        platform.add_source("rtl/boards/tangnano.v")
     elif board == "ecp5_45f":
         platform = ecp5_45f_platform.Platform()
+        platform.add_source("rtl/boards/ecp5.v")
     else:
         platform = sipeed_tang_nano_20k.Platform()
         platform.add_extension(ios_tang_nano_20k)
+        platform.add_source("rtl/boards/tangnano.v")
 
     for constraint in constraints:
         ops = constraint.split(":")
@@ -53,11 +56,11 @@ def build_and_flash_core(
     programer = platform.create_programmer()
 
     if board == "tangnano9k":
-        programer.flash(0, "build/top.fs", external=True)
+        programer.load_bitstream("build/top.fs")
     elif board == "ecp5_45f":
-        programer.flash(0, "build/top.fs", external=True)
+        programer.load_bitstream("build/top.bit")
     else:
-        programer.flash(0, "build/top.fs", external=True)
+        programer.load_bitstream("build/top.fs")
 
 
 def build_and_check_cores(data: dict[str, any], board: str = "tangnano20k") -> None:

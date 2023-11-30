@@ -1,15 +1,14 @@
-
-module top (
-    input wire clk27, // Top level system clock input.
+module core_top #(
+    // Clock frequency in hertz.
+    parameter CLK_HZ = 27000000,
+    parameter BIT_RATE =   9600,
+    parameter PAYLOAD_BITS = 8
+) (
+    input wire clk, // Top level system clock input.
     input wire serial_rx, // UART Recieve pin.
     output wire serial_tx, // UART transmit pin.
     output wire led_n1
 );
-
-// Clock frequency in hertz.
-parameter CLK_HZ = 27000000;
-parameter BIT_RATE =   9600;
-parameter PAYLOAD_BITS = 8;
 
 
 wire [PAYLOAD_BITS-1:0]  uart_rx_data, uart_tx_data;
@@ -32,13 +31,13 @@ end
 
 assign serial_tx = (output_sel == 1'b1) ? tx_module : tx_soc;
 assign rx_soc = (input_sel == 1'b0) ? serial_rx : 1'b0;
-assign clk_soc = (clk_enable == 1'b1) ? clk27 : 1'b0;
+assign clk_soc = (clk_enable == 1'b1) ? clk : 1'b0;
 assign uart_tx_data = uart_rx_data;
 assign uart_tx_en   = uart_rx_valid;
 assign led_n1 = led;
 
 
-always @(posedge clk27 ) begin
+always @(posedge clk ) begin
     if(counter < 50 && reset == 1) begin
         counter <= counter + 1;
     end else if (reset == 1 && counter >= 50) begin
@@ -93,7 +92,7 @@ uart_rx #(
     .PAYLOAD_BITS(PAYLOAD_BITS),
     .CLK_HZ  (CLK_HZ  )
 ) i_uart_rx(
-    .clk          (clk27        ), // Top level system clock input.
+    .clk          (clk          ), // Top level system clock input.
     .resetn       (1            ), // Asynchronous active low reset.
     .uart_rxd     (serial_rx    ), // UART Recieve pin.
     .uart_rx_en   (1'b1         ), // Recieve enable
@@ -110,7 +109,7 @@ uart_tx #(
     .PAYLOAD_BITS(PAYLOAD_BITS),
     .CLK_HZ  (CLK_HZ  )
 ) i_uart_tx(
-    .clk          (clk27          ),
+    .clk          (clk          ),
     .resetn       (1            ),
     .uart_txd     (tx_module    ), // serial_tx
     .uart_tx_en   (uart_tx_en   ),
