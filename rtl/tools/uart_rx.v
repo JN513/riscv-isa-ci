@@ -8,13 +8,13 @@
 //
 
 module uart_rx(
-input  wire       clk          , // Top level system clock input.
-input  wire       resetn       , // Asynchronous active low reset.
-input  wire       uart_rxd     , // UART Recieve pin.
-input  wire       uart_rx_en   , // Recieve enable
-output wire       uart_rx_break, // Did we get a BREAK message?
-output wire       uart_rx_valid, // Valid data recieved and available.
-output reg  [PAYLOAD_BITS-1:0] uart_rx_data   // The recieved data.
+    input  wire       clk          , // Top level system clock input.
+    input  wire       resetn       , // Asynchronous active low reset.
+    input  wire       uart_rxd     , // UART Recieve pin.
+    input  wire       uart_rx_en   , // Recieve enable
+    output wire       uart_rx_break, // Did we get a BREAK message?
+    output wire       uart_rx_valid, // Valid data recieved and available.
+    output reg  [PAYLOAD_BITS-1:0] uart_rx_data   // The recieved data.
 );
 
 // --------------------------------------------------------------------------- 
