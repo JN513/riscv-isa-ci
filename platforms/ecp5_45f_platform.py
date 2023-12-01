@@ -22,8 +22,8 @@ _io = [
     (
         "serial",
         0,
-        Subsignal("rx", Pins("J17"), IOStandard("LVCMOS33")),
-        Subsignal("tx", Pins("H18"), IOStandard("LVCMOS33")),
+        Subsignal("rx", Pins("H18"), IOStandard("LVCMOS33")),
+        Subsignal("tx", Pins("J17"), IOStandard("LVCMOS33")),
     ),
     ("led_n", 0,  Pins("J16"), IOStandard("LVCMOS33")),
     ("led_n", 1,  Pins("J18"), IOStandard("LVCMOS33")),
