@@ -7,7 +7,7 @@
 // - UART transmitter module.
 //
 
-module uart_tx(
+module uart_tool_tx(
     input  wire         clk         , // Top level system clock input.
     input  wire         resetn      , // Asynchronous active low reset.
     output wire         uart_txd    , // UART transmit pin.

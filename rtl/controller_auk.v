@@ -7,8 +7,33 @@ module core_top #(
     input wire clk, // Top level system clock input.
     input wire serial_rx, // UART Recieve pin.
     output wire serial_tx, // UART transmit pin.
-    output wire led_n1
+    output wire led_n0,
+    output wire led_n1,
+    output wire led_n2,
+    output wire led_n3,
+    output wire led_n4,
+    output wire led_n5,
+    input wire switch_n0,
+    input wire switch_n1,
+    input wire switch_n2,
+    input wire switch_n3,
+    input wire switch_n4,
+    input wire switch_n5 // Sistema temporario, futuramente tais pinos podem ser simulados pela serial
 );
+
+wire [2:0] leds;
+wire [5:0]switch;
+
+assign led_n0 = leds[0];
+assign led_n1 = leds[1];
+assign led_n2 = leds[2];
+
+assign switch[0] = switch_n0;
+assign switch[1] = switch_n1;
+assign switch[2] = switch_n2;
+assign switch[3] = switch_n3;
+assign switch[4] = switch_n4;
+assign switch[5] = switch_n5;
 
 
 wire [PAYLOAD_BITS-1:0]  uart_rx_data, uart_tx_data;
@@ -34,7 +59,7 @@ assign rx_soc = (input_sel == 1'b0) ? serial_rx : 1'b0;
 assign clk_soc = (clk_enable == 1'b1) ? clk : 1'b0;
 assign uart_tx_data = uart_rx_data;
 assign uart_tx_en   = uart_rx_valid;
-assign led_n1 = led;
+assign led_n3 = led;
 
 
 always @(posedge clk ) begin
@@ -87,7 +112,7 @@ end
 
 //
 // UART RX
-uart_rx #(
+uart_tool_rx #(
     .BIT_RATE(BIT_RATE),
     .PAYLOAD_BITS(PAYLOAD_BITS),
     .CLK_HZ  (CLK_HZ  )
@@ -104,7 +129,7 @@ uart_rx #(
 //
 // UART Transmitter module.
 //
-uart_tx #(
+uart_tool_tx #(
     .BIT_RATE(BIT_RATE),
     .PAYLOAD_BITS(PAYLOAD_BITS),
     .CLK_HZ  (CLK_HZ  )
@@ -120,22 +145,14 @@ uart_tx #(
 // parte do soc,
 // pinos disponiveis, rx_soc, tx_soc, reset, clk_soc
 
-rvsteel_soc #(
-
-    .CLOCK_FREQUENCY          (27000000           ),
-    .UART_BAUD_RATE           (9600               ),
-    .MEMORY_SIZE              (4096               ),
-    .MEMORY_INIT_FILE         ("/home/julio/eda/riscv-ci/processors/stell/software/build/hello-world.mem"  ),
-    .BOOT_ADDRESS             (32'h00000000       )
-
-  ) rvsteel_soc_instance (
-    
-    .clock                    (clk_soc           ),
-    .reset                    (reset             ),
-    .uart_rx                  (rx_soc            ),
-    .uart_tx                  (tx_soc            )
-
-  );
+aukv_eggs_soc DUT0(
+	.i_clk(clk),
+	.i_rstn(reset),
+	.i_rx(rx_soc),
+	.o_tx(tx_soc),
+	.o_led(leds),
+	.i_switch(switch)
+);
 
 
 endmodule
