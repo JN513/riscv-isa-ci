@@ -12,7 +12,7 @@
                 "processors/stell/hardware/rvsteel-soc.v",
                 "rtl/tools/uart_tx.v",
                 "rtl/tools/uart_rx.v",
-                "rtl/controler_stell.v"
+                "rtl/controller_stell.v"
             ],
             "constraints": [
                 "serial",
@@ -37,10 +37,39 @@
             "name":"Auk-V",
             "folder":"auk-v",
             "files": [
-
+                "processors/auk-v/rtl/core/aukv.v",
+                "processors/auk-v/rtl/core/aukv_alu.v",
+                "processors/auk-v/rtl/core/aukv_csr_regfile.v",
+                "processors/auk-v/rtl/core/aukv_decode.v",
+                "processors/auk-v/rtl/core/aukv_execute.v",
+                "processors/auk-v/rtl/core/aukv_fetch.v",
+                "processors/auk-v/rtl/core/aukv_gpr_regfilie.v",
+                "processors/auk-v/rtl/core/aukv_mem.v",
+                "processors/auk-v/rtl/memory/cache.v",
+                "processors/auk-v/rtl/memory/oc_ram.v",
+                "processors/auk-v/rtl/memory/oc_rom.v",
+                "processors/auk-v/rtl/peripherals/fifo/fifo.v",
+                "processors/auk-v/rtl/peripherals/gpio/gpio.v",
+                "processors/auk-v/rtl/peripherals/uart/baud.v",
+                "processors/auk-v/rtl/peripherals/uart/uart.v",
+                "processors/auk-v/rtl/peripherals/uart/uart_rx.v",
+                "processors/auk-v/rtl/peripherals/uart/uart_tx.v",
+                "processors/auk-v/rtl/soc/aukv_eggs_soc.v",
+                "processors/auk-v/rtl/system/reset_sync.v",
+                "processors/auk-v/rtl/wishbone/wb_arbiter.v",
+                "processors/auk-v/rtl/wishbone/wb_interconnect.v",
+                "processors/auk-v/rtl/wishbone/wb_master.v",
+                "processors/auk-v/rtl/wishbone/wb_switch.v",
+                "rtl/tools/uart_tx.v",
+                "rtl/tools/uart_rx.v",
+                "rtl/controller_auk.v"
             ],
             "constraints": [
-                "serial"
+                "serial",
+                "led_n:0",
+                "led_n:1",
+                "led_n:2",
+                "led_n:3"
             ],
             "enable": false
         }
