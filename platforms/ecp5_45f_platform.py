@@ -16,8 +16,6 @@ import os
 _io = [
     # Clk / Rst
     ("clk25", 0, Pins("P3"), IOStandard("LVCMOS33")),
-    ("rst_n", 0, Pins("AH1"), IOStandard("LVCMOS33")),
-    ("reset", 0, Pins("A11"), IOStandard("LVCMOS25")),
     # Serial
     (
         "serial",
@@ -25,14 +23,22 @@ _io = [
         Subsignal("rx", Pins("H18"), IOStandard("LVCMOS33")),
         Subsignal("tx", Pins("J17"), IOStandard("LVCMOS33")),
     ),
-    ("led_n", 0,  Pins("J16"), IOStandard("LVCMOS33")),
-    ("led_n", 1,  Pins("J18"), IOStandard("LVCMOS33")),
-    ("led_n", 2,  Pins("L5"), IOStandard("LVCMOS33")),
-    ("led_n", 3,  Pins("P16"), IOStandard("LVCMOS33")),
-    ("led_n", 4,  Pins("M4"), IOStandard("LVCMOS33")),
-    ("led_n", 5,  Pins("L4"), IOStandard("LVCMOS33")),
-    ("led_n", 6,  Pins("R3"), IOStandard("LVCMOS33")),
-    ("led_n", 7,  Pins("N4"), IOStandard("LVCMOS33")),
+    ("led_n", 0, Pins("R3"), IOStandard("LVCMOS33")),
+    ("led_n", 1, Pins("M4"), IOStandard("LVCMOS33")),
+    ("led_n", 2, Pins("L5"), IOStandard("LVCMOS33")),
+    ("led_n", 3, Pins("J16"), IOStandard("LVCMOS33")),
+    ("led_n", 4, Pins("N4"), IOStandard("LVCMOS33")),
+    ("led_n", 5, Pins("L4"), IOStandard("LVCMOS33")),
+    ("led_n", 6, Pins("P16"), IOStandard("LVCMOS33")),
+    ("led_n", 7, Pins("J18"), IOStandard("LVCMOS33")),
+    ("btn_n", 0, Pins("R1"), IOStandard("LVCMOS33")),
+    ("btn_n", 1, Pins("U1"), IOStandard("LVCMOS33")),
+    ("btn_n", 2, Pins("W1"), IOStandard("LVCMOS33")),
+    ("btn_n", 3, Pins("M1"), IOStandard("LVCMOS33")),
+    ("btn_n", 4, Pins("T1"), IOStandard("LVCMOS33")),
+    ("btn_n", 5, Pins("Y2"), IOStandard("LVCMOS33")),
+    ("btn_n", 6, Pins("V1"), IOStandard("LVCMOS33")),
+    ("btn_n", 7, Pins("N2"), IOStandard("LVCMOS33")),
 ]
 
 # Platform -----------------------------------------------------------------------------------------

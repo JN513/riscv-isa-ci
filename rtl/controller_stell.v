@@ -7,18 +7,7 @@ module core_top #(
     input wire clk, // Top level system clock input.
     input wire serial_rx, // UART Recieve pin.
     output wire serial_tx, // UART transmit pin.
-    output wire led_n0,
-    output wire led_n1,
-    output wire led_n2,
-    output wire led_n3,
-    output wire led_n4,
-    output wire led_n5,
-    input wire switch_n0,
-    input wire switch_n1,
-    input wire switch_n2,
-    input wire switch_n3,
-    input wire switch_n4,
-    input wire switch_n5 // Sistema temporario, futuramente tais pinos podem ser simulados pela serial
+    output wire led_n1
 );
 
 
@@ -52,8 +41,8 @@ always @(posedge clk ) begin
     if(counter < 50 && reset == 1) begin
         counter <= counter + 1;
     end else if (reset == 1 && counter >= 50) begin
-        reset <= 0;
-        led <= 1;
+        reset <= 1'b0;
+        led <= 1'b1;
     end
     
     if(uart_rx_valid == 1'b1 && uart_data != uart_rx_data) begin
@@ -67,13 +56,13 @@ always @(posedge clk ) begin
                 clk_enable <= 1'b1;
             end
             8'b00000010 : begin // enable reset over 50 clocks cycles
-                led <= 0;
-                reset <= 1;
+                led <= 1'b0;
+                reset <= 1'b1;
                 counter <= 0;
             end
             8'b00000011 : begin // disable reset
-                led <= 1;
-                reset <= 0;
+                led <= 1'b1;
+                reset <= 1'b0;
             end
             8'b00000100 : begin // change tx to soc
                 output_sel <= 1'b0;
@@ -133,10 +122,10 @@ uart_tool_tx #(
 
 rvsteel_soc #(
 
-    .CLOCK_FREQUENCY          (27000000           ),
-    .UART_BAUD_RATE           (9600               ),
+    .CLOCK_FREQUENCY          (CLK_HZ             ),
+    .UART_BAUD_RATE           (BIT_RATE           ),
     .MEMORY_SIZE              (4096               ),
-    .MEMORY_INIT_FILE         ("/home/julio/eda/riscv-ci/processors/stell/software/build/hello-world.mem"  ),
+    .MEMORY_INIT_FILE         ("/home/julio/eda/riscv-ci/processors/stell/hello-world/demo-software/build/hello-world.hex"  ),
     .BOOT_ADDRESS             (32'h00000000       )
 
   ) rvsteel_soc_instance (
