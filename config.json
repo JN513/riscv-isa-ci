@@ -12,7 +12,7 @@
                 "processors/stell/ip/rvsteel-soc.v",
                 "rtl/tools/uart_tx.v",
                 "rtl/tools/uart_rx.v",
-                "rtl/controller_stell.v"
+                "rtl/controller_steel.v"
             ],
             "constraints": [
                 "serial",
