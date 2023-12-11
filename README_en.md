@@ -1,5 +1,7 @@
 # RISC-V ISA CI
 
+This repository has been moved to another location; the currently maintained version is available at: https://github.com/LSC-Unicamp/riscv-isa-ci
+
 CI/CD for RISC-V cores
 
 If you don't speak Portuguese, [click here](README_en.md)
